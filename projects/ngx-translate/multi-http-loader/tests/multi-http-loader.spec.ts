@@ -2,9 +2,9 @@ import {HttpClient} from "@angular/common/http";
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {TestBed} from "@angular/core/testing";
 import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
-import {MultiTranslateHttpLoader} from "../src/public_api";
+import {MultiTranslateWebpackLoader} from "../src/public_api";
 
-describe('MultiTranslateHttpLoader - Single Translation File', () => {
+describe('MultiTranslateWebpackLoader - Single Translation File', () => {
   let translate: TranslateService;
   let http: HttpTestingController;
 
@@ -15,7 +15,7 @@ describe('MultiTranslateHttpLoader - Single Translation File', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useFactory: (httpClient: HttpClient) => new MultiTranslateHttpLoader(httpClient, [
+            useFactory: (httpClient: HttpClient) => new MultiTranslateWebpackLoader(httpClient, [
               {prefix: "/assets/i18n/", suffix: ".json"},
             ]),
             deps: [HttpClient]
@@ -33,10 +33,10 @@ describe('MultiTranslateHttpLoader - Single Translation File', () => {
     http = undefined;
   });
 
-  it('should be able to provide MultiTranslateHttpLoader', () => {
-    expect(MultiTranslateHttpLoader).toBeDefined();
+  it('should be able to provide MultiTranslateWebpackLoader', () => {
+    expect(MultiTranslateWebpackLoader).toBeDefined();
     expect(translate.currentLoader).toBeDefined();
-    expect(translate.currentLoader instanceof MultiTranslateHttpLoader).toBeTruthy();
+    expect(translate.currentLoader instanceof MultiTranslateWebpackLoader).toBeTruthy();
   });
 
   it('should be able to get translations', () => {
@@ -107,7 +107,7 @@ describe('MultiTranslateHttpLoader - Single Translation File', () => {
   });
 });
 
-describe('MultiTranslateHttpLoader - Multiple Translation Files', () => {
+describe('MultiTranslateWebpackLoader - Multiple Translation Files', () => {
   let translate: TranslateService;
   let http: HttpTestingController;
 
@@ -118,7 +118,7 @@ describe('MultiTranslateHttpLoader - Multiple Translation Files', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useFactory: (httpClient: HttpClient) => new MultiTranslateHttpLoader(httpClient, [
+            useFactory: (httpClient: HttpClient) => new MultiTranslateWebpackLoader(httpClient, [
               {prefix: "/assets/i18n/core/", suffix: ".json"},
               {prefix: "/assets/i18n/shared/", suffix: ".json"},
             ]),

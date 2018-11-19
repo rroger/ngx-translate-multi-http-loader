@@ -13,7 +13,7 @@ Get the complete changelog here: https://github.com/denniske/ngx-translate-multi
 
 We assume that you already installed [ngx-translate](https://github.com/ngx-translate/core).
 
-Now you need to install the npm module for `MultiTranslateHttpLoader`:
+Now you need to install the npm module for `MultiTranslateWebpackLoader`:
 
 ```sh
 npm install ngx-translate-multi-http-loader --save
@@ -26,9 +26,9 @@ Choose the version corresponding to your Angular version:
  6           | 10.x+               | 1.x+
 
 ## Usage
-#### 1. Setup the `TranslateModule` to use the `MultiTranslateHttpLoader`:
+#### 1. Setup the `TranslateModule` to use the `MultiTranslateWebpackLoader`:
 
-The `MultiTranslateHttpLoader` uses HttpClient to load translations, which means that you have to import the HttpClientModule from `@angular/common/http` before the `TranslateModule`:
+The `MultiTranslateWebpackLoader` uses HttpClient to load translations, which means that you have to import the HttpClientModule from `@angular/common/http` before the `TranslateModule`:
 
 
 ```ts
@@ -36,12 +36,12 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {MultiTranslateHttpLoader} from "ngx-translate-multi-http-loader";
+import {MultiTranslateWebpackLoader} from "ngx-translate-multi-http-loader";
 import {AppComponent} from "./app";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-    return new MultiTranslateHttpLoader(http, [
+    return new MultiTranslateWebpackLoader(http, [
         {prefix: "./assets/translate/core/", suffix: ".json"},
         {prefix: "./assets/translate/shared/", suffix: ".json"},
     ]);
@@ -64,7 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 export class AppModule { }
 ```
 
-The `MultiTranslateHttpLoader` takes a list of translation file configurations. Each configuration has two optional parameters:
+The `MultiTranslateWebpackLoader` takes a list of translation file configurations. Each configuration has two optional parameters:
 - prefix: string = "/assets/translate/"
 - suffix: string = ".json"
 
@@ -74,7 +74,7 @@ You can change those in the `HttpLoaderFactory` method that we just defined. For
 
 ```ts
 export function HttpLoaderFactory(http: HttpClient) {
-    return new MultiTranslateHttpLoader(http, [
+    return new MultiTranslateWebpackLoader(http, [
         {prefix: "./assets/translate/core/", suffix: ".json"},
         {prefix: "./assets/translate/shared/", suffix: ".json"},
     ]);

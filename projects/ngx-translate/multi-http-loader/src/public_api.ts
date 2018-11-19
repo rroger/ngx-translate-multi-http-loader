@@ -1,1 +1,1 @@
-export * from "./lib/multi-http-loader";
+export * from "./lib/multi-webpack-loader";
